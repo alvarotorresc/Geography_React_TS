@@ -2,15 +2,33 @@ import React from "react";
 import country from "../../models/country";
 
 function Country({ country }: CountryListProps) {
-  const { flag, name, region } = country;
+  const { flag, name, region, capital, timezones, population, nativeName } = country;
+  const nf = new Intl.NumberFormat();
+
+  const timezonesFunction = () => [
+    ` ${timezones[0]} ${timezones[1]}`
+  ];
 
   return (
     <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
       <div className="card">
-        <img src={flag} alt="" className="card-img-top" height="250" width="200" />
+        <img
+          src={flag}
+          alt=""
+          className="card-img-top"
+          height="250"
+          width="200"
+        />
         <div className="card-body">
-          <p className="card-text">Name: {name}</p>
-          <p className="card-text">Region: {region}</p>
+          <h2 className="card-title">{name}</h2>
+          <h6 className="card-text">Region: {region}</h6>
+          <h6 className="card-text">Capital: {capital}</h6>
+          <h6 className="card-text">
+            Principal Timezone(s):{" "}
+            {timezones.length >= 2 ? timezonesFunction() : timezones[0]}
+          </h6>
+          <h6 className="card-text">Population: {nf.format(population)}</h6>
+          <h6 className="card-text">Native Name: {nativeName}</h6>
         </div>
       </div>
     </div>
