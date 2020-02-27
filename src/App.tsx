@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import country from "./models/country";
 import countryService from "./services/CountryService";
 import "./App.css";
@@ -21,7 +21,7 @@ function App(){
   return (
     <div className="App">
       <Header></Header>
-      <div className="row justify-content-center">
+      <div className="row justify-content-center" style={{ width:"100%"}}>
         <CountryList countries={countries}></CountryList>
       </div>
     </div>
