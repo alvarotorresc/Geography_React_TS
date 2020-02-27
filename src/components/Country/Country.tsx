@@ -1,19 +1,20 @@
 import React from "react";
 import country from "../../models/country";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Country({ country }: CountryListProps) {
-  const history = useHistory();
-  const { flag, name, region, capital, timezones, population, nativeName } = country;
+  const {
+    flag,
+    name,
+    region,
+    capital,
+    timezones,
+    population,
+    nativeName
+  } = country;
   const nf = new Intl.NumberFormat();
 
-  const timezonesFunction = () => [
-    ` ${timezones[0]} ${timezones[1]}`
-  ];
-
-  const redirect = () => {
-    history.push('/');
-  }
+  const timezonesFunction = () => [` ${timezones[0]} ${timezones[1]}`];
 
   return (
     <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
@@ -35,8 +36,12 @@ function Country({ country }: CountryListProps) {
           </h6>
           <h6 className="card-text">Population: {nf.format(population)}</h6>
           <h6 className="card-text">Native Name: {nativeName}</h6>
-          <button type="button" className="btn btn-outline-primary" onClick={redirect}></button>
-          
+          <Link
+            to={{ pathname: `/mod/${country.alpha3Code}` }}
+            className="btn btn-outline-primary"
+          >
+            Details
+          </Link>
         </div>
       </div>
     </div>
