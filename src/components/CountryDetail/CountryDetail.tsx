@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from "react";
 import country from "../../models/country";
 import countryService from "../../services/CountryService";
+import { count } from "console";
 
 function CountryDetail() {
-  const [country, setCountry] = useState<country>({} as country);
-  const {
-    flag,
-    name,
-    region,
-    capital,
-    timezones,
-    population,
-    nativeName,
-    iso639_1
-  } = country;
+  const [country, setCountry] = useState<country | null>(null);
 
   const idCountry = window.location.href.split("/")[4];
 
@@ -29,18 +20,22 @@ function CountryDetail() {
 
   const nf = new Intl.NumberFormat();
 
-  const timezonesFunction = () => [` ${timezones[0]} ${timezones[1]}`];
+  if (!country) {
+    return <>Loading</>;
+  }
 
   return (
     <div className="justify-content-center">
-      <img src={flag} alt="" className="" height="40%" width="40%" />
+      <img src={country.flag} alt="" className="" height="40%" width="40%" />
       <div className="">
-        <h2 className="card-title">{name}</h2>
-        <h6 className="card-text">Region: {region}</h6>
-        <h6 className="card-text">Capital: {capital}</h6>
-        <h6>{timezones}</h6>
-        <h6 className="card-text">Population: {nf.format(population)}</h6>
-        <h6 className="card-text">Native Name: {nativeName}</h6>
+        <h2 className="card-title">{country.name}</h2>
+        <h6 className="card-text">Region: {country.region}</h6>
+        <h6 className="card-text">Capital: {country.capital}</h6>
+        <h6>Principal Timezone(s): </h6>
+        <h6 className="card-text">
+          Population: {nf.format(country.population)}
+        </h6>
+        <h6 className="card-text">Native Name: {country.nativeName}</h6>
         <hr />
         <p className="card-text">
           <strong>Top Level Domain:</strong> {country.topLevelDomain}
@@ -76,13 +71,19 @@ function CountryDetail() {
           <strong>NumericCode:</strong> {country.numericCode}
         </p>
         <p className="card-text">
-          <strong>Currencies:</strong> {  }
+          <strong>Currency:</strong>{" "}
+          {country.currencies.map(currency => {
+            return `${currency["name"]} ${currency["symbol"]} `;
+          })}
         </p>
         <p className="card-text">
-          <strong>Languages:</strong> {}
+          <strong>Languages:</strong>{" "}
+          {country.languages.map(language => {
+            return `${language["name"]} `;
+          })}
         </p>
         <p className="card-text">
-          <strong>Translations:</strong> {}
+          <strong>Translations:</strong> {`${Object.values(country.translations)} `}
         </p>
         <p className="card-text">
           <strong>Cioc:</strong> {country.cioc}

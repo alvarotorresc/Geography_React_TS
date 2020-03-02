@@ -25,7 +25,7 @@ function App() {
       <Switch>
         <Route path="/mod/:country_id" component={CountryDetail}></Route>
         <div className="App">
-          <div className="row justify-content-center" style={{ width: "100%" }}>
+          <div className="row justify-content-center">
             <CountryList countries={countries}></CountryList>
           </div>
         </div>
