@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
 import country from "../../models/country";
 import countryService from "../../services/CountryService";
-import { count } from "console";
+import { useParams} from "react-router";
+import { useLocation } from "react-router-dom";
 
 function CountryDetail() {
   const [country, setCountry] = useState<country | null>(null);
 
-  const idCountry = window.location.href.split("/")[4];
+    let {country_id} = useParams();
 
   useEffect(() => {
     const countriesData = () => {
-      countryService.getCountry(idCountry).then(res => {
+      countryService.getCountry(country_id).then(res => {
         setCountry(res.data);
         console.log(res.data);
       });
     };
     countriesData();
-  }, [idCountry]);
+  }, [country_id]);
 
   const nf = new Intl.NumberFormat();
 

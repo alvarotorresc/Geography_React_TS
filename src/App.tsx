@@ -24,12 +24,12 @@ function App() {
       <Header />
       <Switch>
         <Route path="/mod/:country_id" component={CountryDetail}></Route>
-        <div className="App">
-          <div className="row justify-content-center">
-            <CountryList countries={countries}></CountryList>
-          </div>
-        </div>
       </Switch>
+      <div className="App">
+        <div className="row justify-content-center">
+          <CountryList countries={countries}></CountryList>
+        </div>
+      </div>
     </BrowserRouter>
   );
 }
