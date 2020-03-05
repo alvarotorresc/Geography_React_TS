@@ -26,7 +26,7 @@ function CountryDetail() {
   }
 
   return (
-    <div className="justify-content-center">
+    <div className="justify-content-center" style={{color:"white" }}>
       <img src={country.flag} alt="" className="" height="40%" width="40%" />
       <div className="">
         <h2 className="card-title">{country.name}</h2>
