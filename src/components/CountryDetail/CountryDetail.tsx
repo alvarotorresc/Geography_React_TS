@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import country from "../../models/country";
 import countryService from "../../services/CountryService";
-import { useParams} from "react-router";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router";
+import { useLocation, useHistory } from "react-router-dom";
 
 function CountryDetail() {
   const [country, setCountry] = useState<country | null>(null);
 
-    let {country_id} = useParams();
+  let { country_id } = useParams();
 
   useEffect(() => {
     const countriesData = () => {
@@ -20,14 +20,24 @@ function CountryDetail() {
   }, [country_id]);
 
   const nf = new Intl.NumberFormat();
+  let history = useHistory();
 
   if (!country) {
     return <>Loading</>;
   }
 
   return (
-    <div className="justify-content-center" style={{color:"white" }}>
+    <div className="justify-content-center" style={{ color: "white" }}>
+      
       <img src={country.flag} alt="" className="" height="40%" width="40%" />
+      <br/>
+      <button
+        type="button"
+        className="btn btn-primary btn-sm"
+        onClick={() => history.goBack()}
+      >
+        Go back
+      </button>
       <div className="">
         <h2 className="card-title">{country.name}</h2>
         <h6 className="card-text">Region: {country.region}</h6>
@@ -84,7 +94,8 @@ function CountryDetail() {
           })}
         </p>
         <p className="card-text">
-          <strong>Translations:</strong> {`${Object.values(country.translations)} `}
+          <strong>Translations:</strong>{" "}
+          {`${Object.values(country.translations)} `}
         </p>
         <p className="card-text">
           <strong>Cioc:</strong> {country.cioc}
