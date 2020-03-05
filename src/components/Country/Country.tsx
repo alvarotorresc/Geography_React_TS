@@ -18,7 +18,7 @@ function Country({ country }: CountryListProps) {
 
   return (
     <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-      <div className="card">
+      <div className="card" style={{backgroundColor: "#b5b5b5"}}>
         <img
           src={flag}
           alt=""
@@ -38,7 +38,7 @@ function Country({ country }: CountryListProps) {
           <h6 className="card-text">Native Name: {nativeName}</h6>
           <Link
             to={{ pathname: `/mod/${country.alpha3Code}` }}
-            className="btn btn-outline-primary"
+            className="btn btn-outline-light"
           >
             Details
           </Link>
